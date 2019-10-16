@@ -38,6 +38,8 @@ if  [[ ${LAST_COMPLETED_BUILD_SHA} == "null" ]]; then
 
   echo "Searching for CI builds in branch '${PARENT_BRANCH}' ..."
 
+  echo $CIRCLE_TOKEN
+  
   LAST_COMPLETED_BUILD_URL="${CIRCLE_API}/v1.1/project/${REPOSITORY_TYPE}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/tree/${PARENT_BRANCH}?filter=completed&limit=100&shallow=true"
   LAST_COMPLETED_BUILD_SHA=`curl -Ss -u "${CIRCLE_TOKEN}:" "${LAST_COMPLETED_BUILD_URL}" \
     | jq -r "map(\
